@@ -1193,6 +1193,10 @@
         }
         const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
         if (profile) {
+            if (!profile.username) {
+                window.location.href = 'bitswap_choose_username.html';
+                return;
+            }
             // Update name
             const displayName = (profile && profile.username) ? profile.username : (profile && profile.full_name) ? profile.full_name : session.user.email.split('@')[0];
             const fullName = displayName;

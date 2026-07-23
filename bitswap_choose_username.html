@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Username - BitSwap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: linear-gradient(145deg, #0D0D0D, #111111); font-family: Inter, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .card { background: #111111; padding: 40px 42px; border-radius: 48px; width: 480px; max-width: 100%; border: 1px solid #2a2a2a; box-shadow: 0 25px 45px rgba(0,0,0,0.6); }
+        .logo { text-align: center; margin-bottom: 28px; }
+        .logo span { color: #10B981; font-size: 1.6rem; font-weight: 800; }
+        h1 { color: #10B981; font-weight: 700; font-size: 1.6rem; margin-bottom: 6px; text-align: center; }
+        .sub { color: #9ca3af; margin-bottom: 24px; font-size: 0.95rem; text-align: center; }
+        input { width: 100%; padding: 14px 18px; margin: 6px 0; background: #1a1a1a; border: 1px solid #2d354c; border-radius: 30px; color: #fff; font-size: 1rem; outline: none; }
+        input:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+        .btn { width: 100%; background: #10B981; padding: 15px; border: none; border-radius: 40px; font-weight: 700; font-size: 1rem; margin-top: 16px; cursor: pointer; color: #111111; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .msg { padding: 12px 16px; border-radius: 12px; margin-top: 14px; font-size: 0.9rem; display: none; }
+        .msg.error { background: #2a1515; color: #f87171; display: block; }
+        @media (max-width: 520px) { .card { padding: 28px 20px; } }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="logo"><span>BitSwap</span></div>
+    <h1>Choose Your Username</h1>
+    <p class="sub">Almost done — pick a username to finish setting up your account.</p>
+    <input type="text" id="usernameInput" placeholder="Username (e.g. Peter fx)" autocomplete="username">
+    <div class="msg" id="msgBox"></div>
+    <button class="btn" type="button" id="saveBtn">Continue to Dashboard</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SUPABASE_URL = 'https://wzphhuaxrgxprjysxzup.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6cGhodWF4cmd4cHJqeXN4enVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2ODE0MjYsImV4cCI6MjEwMDI1NzQyNn0.JGY2QohM1o262e6coRzKEzoQGjI1L5ruHQ7t4Gi40w';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function showMsg(text) {
+        const el = document.getElementById('msgBox');
+        el.textContent = text;
+        el.className = 'msg error';
+    }
+
+    (async function guard() {
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session) { window.location.href = 'bitswap_login.html'; return; }
+        const { data: profile } = await sb.from('profiles').select('username').eq('id', session.user.id).single();
+        if (profile && profile.username) { window.location.href = 'bitswap_dashboard.html'; }
+    })();
+
+    document.getElementById('saveBtn').addEventListener('click', async function() {
+        const username = document.getElementById('usernameInput').value.trim();
+        if (!username || username.length < 3) return showMsg('Username must be at least 3 characters.');
+
+        this.disabled = true;
+        this.textContent = 'Saving...';
+
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session) { window.location.href = 'bitswap_login.html'; return; }
+
+        const { error } = await sb.from('profiles').update({ username: username }).eq('id', session.user.id);
+        if (error) {
+            this.disabled = false;
+            this.textContent = 'Continue to Dashboard';
+            return showMsg('Error: ' + error.message);
+        }
+        window.location.href = 'bitswap_dashboard.html';
+    });
+</script>
+</body>
+</html>
