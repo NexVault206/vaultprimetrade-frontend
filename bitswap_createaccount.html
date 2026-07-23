@@ -44,7 +44,6 @@
         <div class="divider"><span>or sign up with email</span></div>
 
         <input type="text" id="signupName" placeholder="Full Name" autocomplete="name">
-        <input type="text" id="signupUsername" placeholder="Username (e.g. Peter fx)" autocomplete="username">
         <input type="email" id="signupEmail" placeholder="Email Address" autocomplete="email">
         <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)">
         <input type="password" id="signupConfirm" placeholder="Confirm Password">
@@ -85,13 +84,11 @@
 
     document.getElementById('signupBtn').addEventListener('click', async function() {
         const name = document.getElementById('signupName').value.trim();
-        const username = document.getElementById('signupUsername').value.trim();
         const email = document.getElementById('signupEmail').value.trim();
         const pass = document.getElementById('signupPassword').value;
         const conf = document.getElementById('signupConfirm').value;
 
-        if (!name || !username || !email || !pass || !conf) return showMsg('msgBox', 'Please fill in all fields.', 'error');
-        if (username.length < 3) return showMsg('msgBox', 'Username must be at least 3 characters.', 'error');
+        if (!name || !email || !pass || !conf) return showMsg('msgBox', 'Please fill in all fields.', 'error');
         if (pass !== conf) return showMsg('msgBox', 'Passwords do not match.', 'error');
         if (pass.length < 6) return showMsg('msgBox', 'Password must be at least 6 characters.', 'error');
         if (!turnstileToken) return showMsg('msgBox', 'Please complete the human verification.', 'error');
@@ -104,7 +101,7 @@
                 email: email,
                 password: pass,
                 options: {
-                    data: { full_name: name, username: username },
+                    data: { full_name: name },
                     captchaToken: turnstileToken
                 }
             });
@@ -116,11 +113,11 @@
             }
 
             if (r.data && r.data.user) {
-                await sb.from('profiles').upsert({ id: r.data.user.id, full_name: name, username: username, email: email }, { onConflict: 'id' });
+                await sb.from('profiles').upsert({ id: r.data.user.id, full_name: name, email: email }, { onConflict: 'id' });
             }
 
             if (r.data && r.data.session) {
-                window.location.href = 'bitswap_dashboard.html';
+                window.location.href = 'bitswap_choose_username.html';
             } else {
                 showMsg('msgBox', 'Account created — please log in.', 'success');
                 setTimeout(() => window.location.href = 'bitswap_login.html', 1500);
