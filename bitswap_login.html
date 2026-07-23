@@ -36,6 +36,7 @@
         .resend-link button { background: none; border: none; color: #10B981; font-weight: 600; cursor: pointer; font-size: 0.85rem; width: auto; padding: 0; margin: 0; text-decoration: underline; }
         .resend-link button:disabled { color: #555; text-decoration: none; }
     </style>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
 <div class="login-card">
@@ -45,6 +46,11 @@
 
     <input type="email" id="loginEmail" placeholder="Email Address" autocomplete="email">
     <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+
+    <div class="turnstile-wrap">
+      <div class="h-captcha" data-sitekey="48eae7b2-a4ac-470e-9aec-8aa2fd748958" data-callback="onLoginCaptchaSuccess" data-theme="dark"></div>
+    </div>
+    <script>let loginCaptchaToken = null; function onLoginCaptchaSuccess(token) { loginCaptchaToken = token; }</script>
 
     <div class="msg-box" id="msgBox"></div>
     <button type="button" id="loginBtn">Login</button>
@@ -126,7 +132,8 @@
             btn.textContent = 'Logging in…';
 
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (!loginCaptchaToken) { return showMsg("msgBox", "Please complete the human verification.", "error"); }
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password, options: { captchaToken: loginCaptchaToken } });
 
                 if (error) {
                     if (error.message && error.message.toLowerCase().includes('email not confirmed')) {
