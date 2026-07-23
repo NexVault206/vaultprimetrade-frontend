@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Investment Plans | VaultPrimeTrade</title>
+    <title>Investment Plans | BitSwap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* ---------- ROOT VARIABLES (Dark default) ---------- */
@@ -540,7 +540,7 @@
         <!-- Header -->
         <div class="page-header">
             <div class="header-left">
-                <button class="back-btn" onclick="window.location.href='vaultprimetrade_dashboard.html'">
+                <button class="back-btn" onclick="window.location.href='bitswap_dashboard.html'">
                     <i class="fas fa-arrow-left"></i> Dashboard
                 </button>
                 <div class="page-title">📈 Invest <span>Plans</span></div>
@@ -595,13 +595,13 @@
 
 <!-- Bottom Navigation -->
 <nav class="bottom-nav">
-    <a href="vaultprimetrade_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="vaultprimetrade_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
-    <a href="vaultprimetrade_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
-    <a href="vaultprimetrade_plans.html" class="nav-item active"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
-    <a href="vaultprimetrade_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
-    <a href="vaultprimetrade_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
-    <a href="vaultprimetrade_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+    <a href="bitswap_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="bitswap_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
+    <a href="bitswap_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+    <a href="bitswap_plans.html" class="nav-item active"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
+    <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
+    <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
+    <a href="bitswap_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
 </nav>
 
 <script>
@@ -675,7 +675,7 @@
             const { data: { session } } = await sb.auth.getSession();
             if (!session) {
                 // Not logged in – redirect to login
-                window.location.href = 'vaultprimetrade_login.html';
+                window.location.href = 'bitswap_login.html';
                 return;
             }
             const { data: profile, error } = await sb.from('profiles')

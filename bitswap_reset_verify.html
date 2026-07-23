@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reset Password — VaultPrimeTrade</title>
+<title>Reset Password — BitSwap</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +30,7 @@
 </head>
 <body>
 <div class="card">
-  <div class="logo">VAULTPRIMETRADE</div>
+  <div class="logo">BITSWAP</div>
   <div id="codeStep">
     <h1>Enter Reset Code</h1>
     <p class="sub" id="subText">Enter the 6-digit code sent to your email.</p>
@@ -104,7 +104,7 @@
       if (error) { showMsg(error.message, 'error'); return; }
       localStorage.removeItem('pending_reset_email');
       showMsg('Password updated! Redirecting to login...', 'success');
-      setTimeout(function() { window.location.href = 'vaultprimetrade_login.html'; }, 1500);
+      setTimeout(function() { window.location.href = 'bitswap_login.html'; }, 1500);
     });
     document.getElementById('resendLink').addEventListener('click', async function() {
       if (!email) return showMsg('Email not found.', 'error');

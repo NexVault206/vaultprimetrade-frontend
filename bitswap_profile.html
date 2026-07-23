@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Account Settings | VaultPrimeTrade</title>
+    <title>Account Settings | BitSwap</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -20,11 +20,11 @@
             align-items: flex-start;
         }
         :root {
-            --bg-primary: #0A0E17;
-            --bg-secondary: #0F1624;
-            --bg-card: #0F1624;
-            --bg-elevated: #131A2C;
-            --border: #1E293B;
+            --bg-primary: #0D0D0D;
+            --bg-secondary: #111111;
+            --bg-card: #111111;
+            --bg-elevated: #141414;
+            --border: #1f1f1f;
             --text-primary: #EFF3FC;
             --text-secondary: #94A3B8;
             --accent: #10B981;
@@ -75,7 +75,7 @@
             justify-content: center;
             font-weight: 800;
             font-size: 22px;
-            color: #0A0E17;
+            color: #0D0D0D;
         }
         .logo-text {
             font-size: 26px;
@@ -173,7 +173,7 @@
             border-radius: 60px;
             font-weight: 700;
             font-size: 16px;
-            color: #0A0E17;
+            color: #0D0D0D;
             cursor: pointer;
             transition: 0.2s;
             width: 100%;
@@ -224,8 +224,8 @@
     <!-- Header -->
     <div class="logo-header">
         <div class="logo">
-            <div class="logo-icon">V</div>
-            <div class="logo-text">VaultPrimeTrade</div>
+            <div class="logo-icon">B</div>
+            <div class="logo-text">BitSwap</div>
         </div>
         <div class="header-actions">
             <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
@@ -289,13 +289,13 @@
 </div>
 
 <nav class="bottom-nav">
-    <a href="vaultprimetrade_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="vaultprimetrade_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
-    <a href="vaultprimetrade_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
-    <a href="vaultprimetrade_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
-    <a href="vaultprimetrade_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
-    <a href="vaultprimetrade_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
-    <a href="vaultprimetrade_profile.html" class="nav-item active"><i class="fas fa-user"></i><span>Profile</span></a>
+    <a href="bitswap_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="bitswap_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
+    <a href="bitswap_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+    <a href="bitswap_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
+    <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
+    <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
+    <a href="bitswap_profile.html" class="nav-item active"><i class="fas fa-user"></i><span>Profile</span></a>
 </nav>
 
 <script>
@@ -307,7 +307,7 @@
 
         // ── AUTH CHECK ──────────────────────────────────────────
         const { data: { session } } = await sb.auth.getSession();
-        if (!session) { window.location.href = 'vaultprimetrade_login.html'; return; }
+        if (!session) { window.location.href = 'bitswap_login.html'; return; }
 
         // ── LOAD USER PROFILE ───────────────────────────────────
         const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
@@ -333,7 +333,7 @@
 
         // Back to dashboard
         document.getElementById('backToDashboard').addEventListener('click', function() {
-            window.location.href = 'vaultprimetrade_dashboard.html';
+            window.location.href = 'bitswap_dashboard.html';
         });
 
         // ── UPDATE PROFILE ──────────────────────────────────────
@@ -368,7 +368,7 @@
         document.getElementById('logoutBtn').addEventListener('click', async function() {
             this.textContent = 'Logging out...';
             await sb.auth.signOut();
-            window.location.href = 'vaultprimetrade_login.html';
+            window.location.href = 'bitswap_login.html';
         });
 
         // Toast helper

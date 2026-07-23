@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>VaultPrimeTrade | Deposit</title>
+    <title>BitSwap | Deposit</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         :root{
-            --bg-primary:#0A0E17;--bg-secondary:#0F1624;--bg-card:#0F1624;
-            --bg-elevated:#131A2C;--border:#1E293B;--text-primary:#EFF3FC;
+            --bg-primary:#0D0D0D;--bg-secondary:#111111;--bg-card:#111111;
+            --bg-elevated:#141414;--border:#1f1f1f;--text-primary:#EFF3FC;
             --text-secondary:#94A3B8;--accent:#10B981;--accent-dark:#047857;
             --accent-hover:#10B981;--success:#2BE07E;--warning:#FFB347;--danger:#FF4D4D;
         }
@@ -47,7 +47,7 @@
         .tab-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);
             font-weight:600;padding:8px 16px;border-radius:40px;cursor:pointer;font-size:13px;
             transition:0.2s;}
-        .tab-btn.active{background:var(--accent);color:#0A0E17;border-color:var(--accent);}
+        .tab-btn.active{background:var(--accent);color:#0D0D0D;border-color:var(--accent);}
         .search-box{background:var(--bg-secondary);border:1px solid var(--border);
             border-radius:50px;padding:12px 16px;display:flex;gap:10px;margin-bottom:20px;}
         .search-box input{background:transparent;border:none;width:100%;
@@ -61,7 +61,7 @@
         .method-name{font-weight:700;font-size:14px;}
         .method-limit{font-size:12px;color:var(--text-secondary);margin-top:2px;}
         .select-btn{background:var(--accent);border:none;padding:8px 20px;border-radius:40px;
-            font-weight:700;color:#0A0E17;cursor:pointer;font-size:13px;white-space:nowrap;}
+            font-weight:700;color:#0D0D0D;cursor:pointer;font-size:13px;white-space:nowrap;}
         .select-btn:hover{background:var(--accent-hover);}
         .deposit-form{display:none;}
         .deposit-form.active{display:block;}
@@ -87,7 +87,7 @@
             align-items:center;gap:6px;}
         .copy-btn:hover{border-color:var(--accent);color:var(--accent);}
         .confirm-btn{background:var(--accent);border:none;padding:14px;width:100%;
-            border-radius:50px;font-size:16px;font-weight:700;color:#0A0E17;cursor:pointer;
+            border-radius:50px;font-size:16px;font-weight:700;color:#0D0D0D;cursor:pointer;
             margin-bottom:10px;transition:0.2s;}
         .confirm-btn:hover{background:var(--accent-hover);}
         .cancel-btn{background:transparent;border:1px solid var(--border);padding:12px;
@@ -123,7 +123,7 @@
 </head>
 <body>
     <div class="page-header">
-        <button class="back-btn" onclick="window.location.href='vaultprimetrade_dashboard.html'">
+        <button class="back-btn" onclick="window.location.href='bitswap_dashboard.html'">
             <i class="fas fa-arrow-left"></i> Dashboard
         </button>
         <span class="page-title"><i class="fas fa-arrow-down" style="color:var(--success);margin-right:6px;"></i>Deposit</span>
@@ -209,20 +209,20 @@
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-        <a href="vaultprimetrade_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="vaultprimetrade_deposit.html" class="nav-item active"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
-        <a href="vaultprimetrade_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
-        <a href="vaultprimetrade_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
-        <a href="vaultprimetrade_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
-        <a href="vaultprimetrade_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
-        <a href="vaultprimetrade_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+        <a href="bitswap_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="bitswap_deposit.html" class="nav-item active"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
+        <a href="bitswap_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+        <a href="bitswap_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
+        <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
+        <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
+        <a href="bitswap_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
     </nav>
 
 <script>
     // Auth guard
-    if (!localStorage.getItem('nvt_token')) window.location.href = 'vaultprimetrade_login.html';
+    if (!localStorage.getItem('nvt_token')) window.location.href = 'bitswap_login.html';
 
-    const API_BASE = 'https://vaultprimetrade-backend.onrender.com/api';
+    const API_BASE = 'https://bitswap-backend.onrender.com/api';
     const authToken = localStorage.getItem('nvt_token');
     let currentUser = null;
     let selectedMethod = null;

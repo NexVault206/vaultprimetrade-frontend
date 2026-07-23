@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Withdrawal | VaultPrimeTrade</title>
+    <title>Withdrawal | BitSwap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
@@ -116,13 +116,13 @@
 <body>
 <div class="withdrawal-container" id="withdrawApp"></div>
 <nav class="bottom-nav">
-    <a href="vaultprimetrade_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="vaultprimetrade_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
-    <a href="vaultprimetrade_withdraw.html" class="nav-item active"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
-    <a href="vaultprimetrade_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
-    <a href="vaultprimetrade_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
-    <a href="vaultprimetrade_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
-    <a href="vaultprimetrade_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+    <a href="bitswap_dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="bitswap_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
+    <a href="bitswap_withdraw.html" class="nav-item active"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+    <a href="bitswap_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
+    <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
+    <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
+    <a href="bitswap_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
 </nav>
 
 <script>
@@ -191,7 +191,7 @@
         try {
             const { data: { session } } = await sb.auth.getSession();
             if (!session) {
-                window.location.href = 'vaultprimetrade_login.html';
+                window.location.href = 'bitswap_login.html';
                 return;
             }
             const { data: profile, error } = await sb.from('profiles')
@@ -547,7 +547,7 @@
                 </p>
                 <!-- Admin button – in production, this would be hidden from normal users -->
                 <div style="margin-top: 20px; text-align: center;">
-                    <button class="inline-button" id="adminUpgradeBtn" style="background: #10B981; color: #0A0E17; padding: 12px 24px; font-weight: 700;">
+                    <button class="inline-button" id="adminUpgradeBtn" style="background: #10B981; color: #0D0D0D; padding: 12px 24px; font-weight: 700;">
                         <i class="fas fa-gem"></i> Admin: Upgrade Tier
                     </button>
                 </div>

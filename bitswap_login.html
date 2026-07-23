@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — VaultPrimeTrade</title>
+    <title>Login — BitSwap</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: linear-gradient(145deg, #07090f, #0a0c12); font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .login-card { background: #0f121b; padding: 40px 42px; border-radius: 48px; width: 420px; max-width: 100%; border: 1px solid #2a3145; box-shadow: 0 25px 45px rgba(0,0,0,0.6); }
+        body { background: linear-gradient(145deg, #0D0D0D, #111111); font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .login-card { background: #111111; padding: 40px 42px; border-radius: 48px; width: 420px; max-width: 100%; border: 1px solid #2a2a2a; box-shadow: 0 25px 45px rgba(0,0,0,0.6); }
         .logo { text-align: center; margin-bottom: 28px; }
         .logo span { color: #10B981; font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; }
         .login-card h1 { color: #10B981; font-weight: 700; font-size: 1.8rem; margin-bottom: 6px; }
         .sub { color: #9ca3af; margin-bottom: 24px; font-size: 0.95rem; }
-        input { width: 100%; padding: 14px 18px; margin: 6px 0; background: #1a1f2c; border: 1px solid #2d354c; border-radius: 30px; color: #fff; font-size: 1rem; outline: none; transition: border 0.2s; }
+        input { width: 100%; padding: 14px 18px; margin: 6px 0; background: #1a1a1a; border: 1px solid #2d354c; border-radius: 30px; color: #fff; font-size: 1rem; outline: none; transition: border 0.2s; }
         input:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(245,166,35,0.15); }
-        button { width: 100%; background: #10B981; padding: 15px; border: none; border-radius: 40px; font-weight: 700; font-size: 1rem; margin-top: 16px; cursor: pointer; transition: opacity 0.2s; color: #0f121b; }
+        button { width: 100%; background: #10B981; padding: 15px; border: none; border-radius: 40px; font-weight: 700; font-size: 1rem; margin-top: 16px; cursor: pointer; transition: opacity 0.2s; color: #111111; }
         button:disabled { opacity: 0.5; cursor: not-allowed; }
         .msg-box { padding: 12px 16px; border-radius: 12px; margin-top: 14px; font-size: 0.9rem; display: none; line-height: 1.4; }
         .msg-box.error { background: #2a1515; color: #f87171; display: block; }
@@ -30,7 +30,7 @@
         @media (max-width: 520px) { .login-card { padding: 28px 20px; } }
         .hidden { display: none !important; }
         .otp-inputs { display: flex; gap: 8px; justify-content: center; margin: 16px 0; }
-        .otp-inputs input { width: 44px; height: 52px; text-align: center; font-size: 1.4rem; font-weight: 700; border-radius: 14px; padding: 0; margin: 0; border: 2px solid #2d354c; background: #1a1f2c; color: #fff; }
+        .otp-inputs input { width: 44px; height: 52px; text-align: center; font-size: 1.4rem; font-weight: 700; border-radius: 14px; padding: 0; margin: 0; border: 2px solid #2d354c; background: #1a1a1a; color: #fff; }
         .otp-inputs input:focus { border-color: #10B981; }
         .resend-link { text-align: center; margin-top: 12px; color: #9ca3af; font-size: 0.85rem; }
         .resend-link button { background: none; border: none; color: #10B981; font-weight: 600; cursor: pointer; font-size: 0.85rem; width: auto; padding: 0; margin: 0; text-decoration: underline; }
@@ -39,9 +39,9 @@
 </head>
 <body>
 <div class="login-card">
-    <div class="logo"><span>⬡ VaultPrimeTrade</span></div>
+    <div class="logo"><span>⬡ BitSwap</span></div>
     <h1>Welcome Back</h1>
-    <p class="sub">Login to your VaultPrimeTrade account</p>
+    <p class="sub">Login to your BitSwap account</p>
 
     <input type="email" id="loginEmail" placeholder="Email Address" autocomplete="email">
     <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
@@ -50,14 +50,14 @@
     <button type="button" id="loginBtn">Login</button>
 
     <div class="links">
-        <a href="vaultprimetrade_createaccount.html">Create Account</a> |
+        <a href="bitswap_createaccount.html">Create Account</a> |
         <a href="#" id="forgotLink">Forgot Password?</a>
     </div>
-    <div class="back-home"><a href="vaultprimetrade_index.html">← Back to Home</a></div>
+    <div class="back-home"><a href="bitswap_index.html">← Back to Home</a></div>
 </div>
 
 <div id="otpVerifyCard" class="login-card hidden" style="margin-top:16px;">
-    <div class="logo"><span>VaultPrimeTrade</span></div>
+    <div class="logo"><span>BitSwap</span></div>
     <h1 style="font-size:1.4rem;">Verify Your Email</h1>
     <p class="sub" id="otpVerifySub">Enter the 6-digit code sent to your email.</p>
     <div class="otp-inputs">
@@ -98,7 +98,7 @@
                     return;
                 }
                 const { data: { session } } = await supabase.auth.getSession();
-                if (session) window.location.href = 'vaultprimetrade_dashboard.html';
+                if (session) window.location.href = 'bitswap_dashboard.html';
             } catch (e) {
                 console.warn('Session check error:', e);
             }
@@ -146,7 +146,7 @@
                     return showMessage(error.message, 'error');
                 }
 
-                window.location.href = 'vaultprimetrade_dashboard.html';
+                window.location.href = 'bitswap_dashboard.html';
 
             } catch (err) {
                 console.error(err);
@@ -161,7 +161,7 @@
         document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
         document.getElementById('forgotLink').addEventListener('click', (e) => {
             e.preventDefault();
-            window.location.href = 'vaultprimetrade_forgot.html';
+            window.location.href = 'bitswap_forgot.html';
         });
 
         (function checkUrlParam() {
@@ -216,7 +216,7 @@
                     return showOtpMsg(error.message, 'error');
                 }
                 showOtpMsg('Email verified! Logging you in...', 'success');
-                setTimeout(function() { window.location.href = 'vaultprimetrade_dashboard.html'; }, 1500);
+                setTimeout(function() { window.location.href = 'bitswap_dashboard.html'; }, 1500);
             } catch(e) {
                 this.disabled = false; this.textContent = 'Verify and Login';
                 showOtpMsg('Unexpected error. Please try again.', 'error');

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel — VaultPrimeTrade</title>
+<title>Admin Panel — BitSwap</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#0A0E17;--bg2:#0F1624;--card:#131A2C;--border:#1E293B;--text:#EFF3FC;--text2:#94A3B8;--accent:#10B981;}
+:root{--bg:#0D0D0D;--bg2:#111111;--card:#141414;--border:#1f1f1f;--text:#EFF3FC;--text2:#94A3B8;--accent:#10B981;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding:16px 16px 40px;}
 
 /* LOGIN */
@@ -16,7 +16,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;paddi
 .login-wrap h2{margin-bottom:24px;color:var(--accent);}
 input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:30px;padding:14px 18px;color:var(--text);font-size:1rem;outline:none;margin-bottom:12px;}
 input:focus{border-color:var(--accent);}
-.btn{width:100%;background:var(--accent);color:#0A0E17;border:none;border-radius:30px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;margin-top:8px;}
+.btn{width:100%;background:var(--accent);color:#0D0D0D;border:none;border-radius:30px;padding:14px;font-weight:700;font-size:1rem;cursor:pointer;margin-top:8px;}
 .btn:disabled{opacity:0.5;}
 .btn-red{background:#ef4444;color:white;}
 .btn-green{background:#22c55e;color:white;}
@@ -28,7 +28,7 @@ input:focus{border-color:var(--accent);}
 .logo{font-weight:800;font-size:1.1rem;color:var(--accent);}
 .tabs{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
 .tab{padding:10px 18px;border-radius:20px;cursor:pointer;font-weight:600;font-size:0.85rem;border:1px solid var(--border);background:var(--card);color:var(--text2);white-space:nowrap;}
-.tab.active{background:var(--accent);color:#0A0E17;border-color:var(--accent);}
+.tab.active{background:var(--accent);color:#0D0D0D;border-color:var(--accent);}
 .tab-content{display:none;}
 .tab-content.active{display:block;}
 
@@ -44,7 +44,7 @@ input:focus{border-color:var(--accent);}
 .action-btn.green{background:#1a2a1a;color:#22c55e;}
 .action-btn.red{background:#2a1515;color:#ef4444;}
 .action-btn.yellow{background:#2a2a1a;color:#f59e0b;}
-.action-btn.blue{background:#1a1f2c;color:#60a5fa;}
+.action-btn.blue{background:#1a1a1a;color:#60a5fa;}
 .action-btn.purple{background:#2a1a3a;color:#c084fc;}
 .bal-input{width:120px;padding:8px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;color:var(--text);font-size:0.85rem;outline:none;}
 .bal-input:focus{border-color:var(--accent);}
@@ -67,7 +67,7 @@ input:focus{border-color:var(--accent);}
 .msg-meta{color:var(--text2);font-size:0.75rem;}
 
 .empty{text-align:center;padding:40px;color:var(--text2);}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1a1f2c;color:var(--text);padding:12px 24px;border-radius:30px;border:1px solid var(--accent);z-index:9999;display:none;}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--text);padding:12px 24px;border-radius:30px;border:1px solid var(--accent);z-index:9999;display:none;}
 .loading{text-align:center;padding:20px;color:var(--text2);}
 .stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
 .stats-bar .s{background:var(--card);border-radius:16px;padding:14px;text-align:center;border:1px solid var(--border);}
@@ -81,13 +81,13 @@ input:focus{border-color:var(--accent);}
 .chat-user-item.active-chat{background:var(--card);border-color:var(--accent);}
 .chat-box{background:var(--bg2);border-radius:20px;padding:16px;max-height:400px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:8px;}
 .chat-msg{max-width:80%;padding:10px 14px;border-radius:16px;word-break:break-word;}
-.chat-msg.admin{background:var(--accent);color:#0A0E17;align-self:flex-end;}
+.chat-msg.admin{background:var(--accent);color:#0D0D0D;align-self:flex-end;}
 .chat-msg.user{background:var(--card);color:var(--text);align-self:flex-start;}
 .chat-msg .time{font-size:0.6rem;opacity:0.6;margin-left:8px;}
 .chat-input-wrap{display:flex;gap:8px;}
 .chat-input-wrap input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:30px;padding:12px 16px;color:var(--text);outline:none;}
 .chat-input-wrap input:focus{border-color:var(--accent);}
-.chat-input-wrap button{background:var(--accent);border:none;padding:0 20px;border-radius:30px;font-weight:700;color:#0A0E17;cursor:pointer;}
+.chat-input-wrap button{background:var(--accent);border:none;padding:0 20px;border-radius:30px;font-weight:700;color:#0D0D0D;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -95,15 +95,15 @@ input:focus{border-color:var(--accent);}
 <!-- LOGIN SCREEN -->
 <div class="login-wrap" id="loginScreen">
   <div style="text-align:center;margin-bottom:24px;">
-    <div style="background:var(--accent);color:#0A0E17;width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;margin:0 auto 12px;">N</div>
+    <div style="background:var(--accent);color:#0D0D0D;width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;margin:0 auto 12px;">N</div>
     <h2>Admin Panel</h2>
-    <p style="color:var(--text2);font-size:0.85rem;">VaultPrimeTrade Administration</p>
+    <p style="color:var(--text2);font-size:0.85rem;">BitSwap Administration</p>
   </div>
   <input type="email" id="adminEmail" placeholder="Admin Email">
   <input type="password" id="adminPassword" placeholder="Password">
   <div id="loginError" style="color:#ef4444;font-size:0.85rem;margin-bottom:8px;display:none;"></div>
   <button class="btn" id="loginBtn" onclick="adminLogin()">Login to Admin Panel</button>
-  <button class="btn btn-outline" style="margin-top:8px;" onclick="window.location.href='vaultprimetrade_dashboard.html'">← Back to Dashboard</button>
+  <button class="btn btn-outline" style="margin-top:8px;" onclick="window.location.href='bitswap_dashboard.html'">← Back to Dashboard</button>
 </div>
 
 <!-- ADMIN PANEL -->
@@ -165,13 +165,13 @@ input:focus{border-color:var(--accent);}
 
 <!-- REPLY MODAL (for messages) -->
 <div id="replyOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#131A2C;border-radius:24px;padding:24px;width:90%;max-width:400px;border:1px solid #1E293B;">
+  <div style="background:#141414;border-radius:24px;padding:24px;width:90%;max-width:400px;border:1px solid #1f1f1f;">
     <h3 style="margin-bottom:16px;color:#10B981;"><i class="fas fa-reply"></i> Reply to User</h3>
     <div id="replyTo" style="color:#94A3B8;font-size:13px;margin-bottom:12px;"></div>
-    <textarea id="replyBody" rows="5" style="width:100%;background:#0F1624;border:1px solid #1E293B;border-radius:12px;padding:12px;color:#EFF3FC;font-family:Inter,sans-serif;font-size:14px;outline:none;resize:none;margin-bottom:12px;" placeholder="Type your reply..."></textarea>
+    <textarea id="replyBody" rows="5" style="width:100%;background:#111111;border:1px solid #1f1f1f;border-radius:12px;padding:12px;color:#EFF3FC;font-family:Inter,sans-serif;font-size:14px;outline:none;resize:none;margin-bottom:12px;" placeholder="Type your reply..."></textarea>
     <div style="display:flex;gap:8px;">
-      <button onclick="sendReply()" style="flex:1;background:#10B981;color:#0A0E17;border:none;border-radius:20px;padding:12px;font-weight:700;cursor:pointer;">Send Reply</button>
-      <button onclick="closeReply()" style="flex:1;background:#1E293B;color:#94A3B8;border:none;border-radius:20px;padding:12px;cursor:pointer;">Cancel</button>
+      <button onclick="sendReply()" style="flex:1;background:#10B981;color:#0D0D0D;border:none;border-radius:20px;padding:12px;font-weight:700;cursor:pointer;">Send Reply</button>
+      <button onclick="closeReply()" style="flex:1;background:#1f1f1f;color:#94A3B8;border:none;border-radius:20px;padding:12px;cursor:pointer;">Cancel</button>
     </div>
   </div>
 </div>
@@ -183,7 +183,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── SESSION CHECK ON LOAD ───────────────────────────────────────
-const ADMIN_EMAILS = ['vaultprimetrade@gmail.com'];
+const ADMIN_EMAILS = ['bitswap@gmail.com'];
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
   if (session) {
@@ -399,7 +399,7 @@ async function loadMessages() {
     if (!data.length) { document.getElementById('messagesList').innerHTML = '<div class="empty">No messages yet</div>'; return; }
     document.getElementById('messagesList').innerHTML = data.map(m => `
       <div class="msg-card" style="${m.read ? 'opacity:0.7' : ''}">
-        <div class="msg-subject">${m.subject || 'No subject'} ${!m.read ? '<span style="background:#10B981;color:#0A0E17;padding:2px 8px;border-radius:10px;font-size:0.7rem;">NEW</span>' : ''}</div>
+        <div class="msg-subject">${m.subject || 'No subject'} ${!m.read ? '<span style="background:#10B981;color:#0D0D0D;padding:2px 8px;border-radius:10px;font-size:0.7rem;">NEW</span>' : ''}</div>
         <div class="msg-body">${m.message}</div>
         <div class="msg-meta">${m.profiles?.full_name || ''} (${m.profiles?.email || ''}) • ${new Date(m.created_at).toLocaleDateString()}</div>
         <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
@@ -412,7 +412,7 @@ async function loadMessages() {
 }
 
 // ── REPLY SYSTEM ────────────────────────────────────────────────
-const BACKEND_URL = 'https://vaultprimetrade-backend-1.onrender.com';
+const BACKEND_URL = 'https://bitswap-backend-1.onrender.com';
 let currentReplyMsgId = null;
 let currentReplyEmail = null;
 

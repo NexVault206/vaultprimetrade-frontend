@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reset Password — VaultPrimeTrade</title>
+<title>Reset Password — BitSwap</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@
 </head>
 <body>
 <div class="card">
-  <div class="logo">VAULTPRIMETRADE</div>
+  <div class="logo">BITSWAP</div>
 
   <!-- STEP 1: EMAIL -->
   <div id="emailStep">
@@ -41,7 +41,7 @@
     <p class="sub">Enter your email and we will send you a reset code.</p>
     <input type="email" class="text-input" id="emailInput" placeholder="Email address" autocomplete="email">
     <button class="btn" id="sendBtn">Send Reset Code</button>
-    <div class="back"><a href="vaultprimetrade_login.html">Back to Login</a></div>
+    <div class="back"><a href="bitswap_login.html">Back to Login</a></div>
     <div class="msg" id="emailMsg"></div>
   </div>
 
@@ -170,7 +170,7 @@ document.getElementById('updateBtn').addEventListener('click', async function() 
   this.disabled = false; this.textContent = 'Update Password';
   if (error) return msg('passMsg', error.message, 'error');
   msg('passMsg','Password updated! Redirecting to login...','success');
-  setTimeout(function() { window.location.href = 'vaultprimetrade_login.html'; }, 1500);
+  setTimeout(function() { window.location.href = 'bitswap_login.html'; }, 1500);
 });
 </script>
 </body>

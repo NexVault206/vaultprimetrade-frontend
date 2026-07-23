@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>VaultPrimeTrade | Dashboard</title>
+    <title>BitSwap | Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -18,11 +18,11 @@
         }
         :root {
             /* DARK MODE (default) */
-            --bg-primary: #0A0E17;
-            --bg-secondary: #0F1624;
-            --bg-card: #0F1624;
-            --bg-elevated: #131A2C;
-            --border: #1E293B;
+            --bg-primary: #0D0D0D;
+            --bg-secondary: #111111;
+            --bg-card: #111111;
+            --bg-elevated: #141414;
+            --border: #1f1f1f;
             --text-primary: #EFF3FC;
             --text-secondary: #94A3B8;
             --accent: #10B981;
@@ -77,7 +77,7 @@
             justify-content: center;
             font-weight: 800;
             font-size: 22px;
-            color: #0A0E17;
+            color: #0D0D0D;
         }
         body.light .logo-icon {
             color: #1A1D2E;
@@ -151,7 +151,7 @@
             border-radius: 36px;
             font-weight: 600;
             font-size: 14px;
-            color: #0A0E17;
+            color: #0D0D0D;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -195,7 +195,7 @@
             padding: 12px 28px;
             border-radius: 44px;
             font-weight: 700;
-            color: #0A0E17;
+            color: #0D0D0D;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
@@ -438,7 +438,7 @@
             transition: 0.2s;
         }
         body.light .message-float { box-shadow: 0 6px 20px rgba(201,154,43,0.25); }
-        .message-float i { color: #0A0E17; font-size: 24px; }
+        .message-float i { color: #0D0D0D; font-size: 24px; }
         body.light .message-float i { color: #1A1D2E; }
         .message-float:hover { transform: scale(1.05); }
 
@@ -486,7 +486,7 @@
         .msg-send-btn {
             width: 100%;
             background: var(--accent);
-            color: #0A0E17;
+            color: #0D0D0D;
             border: none;
             border-radius: 30px;
             padding: 14px;
@@ -587,7 +587,7 @@
         .forex-pair-chip.active {
             background: var(--accent);
             border-color: var(--accent);
-            color: #0A0E17;
+            color: #0D0D0D;
         }
         body.light .forex-pair-chip.active { color: #1A1D2E; }
         .forex-pair-chip:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
@@ -704,7 +704,7 @@
         .kyc-submit-btn {
             width: 100%;
             background: var(--accent);
-            color: #0A0E17;
+            color: #0D0D0D;
             border: none;
             border-radius: 30px;
             padding: 14px;
@@ -757,8 +757,8 @@
     <!-- ===== HEADER ===== -->
     <div class="logo-header">
         <div class="logo">
-            <div class="logo-icon">V</div>
-            <div class="logo-text">VaultPrimeTrade</div>
+            <div class="logo-icon">B</div>
+            <div class="logo-text">BitSwap</div>
         </div>
         <div class="header-actions">
             <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
@@ -875,7 +875,7 @@
                 <h4>Refer & Earn</h4>
                 <p>Earn commission when someone signs up using your link</p>
                 <div class="link-box">
-                    <span id="refLink">https://VaultPrimeTrade.com/user</span>
+                    <span id="refLink">https://BitSwap.com/user</span>
                     <button class="copy-btn" id="copyRefBtn">Copy</button>
                 </div>
                 <div class="refer-stats">
@@ -920,18 +920,18 @@
 
 <!-- ===== FLOATING MESSAGE BUTTON ===== -->
 <div class="message-float" id="messageFloatBtn" style="position:relative;"><i class="fas fa-comment-dots"></i></div>
-<div id="chatModal" style="display:none;position:fixed;bottom:80px;right:16px;width:320px;max-width:calc(100vw - 32px);background:#0F1624;border:1px solid #1E293B;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.8);z-index:999;flex-direction:column;">
-  <div style="background:#131A2C;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1E293B;">
+<div id="chatModal" style="display:none;position:fixed;bottom:80px;right:16px;width:320px;max-width:calc(100vw - 32px);background:#111111;border:1px solid #1f1f1f;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.8);z-index:999;flex-direction:column;">
+  <div style="background:#141414;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1f1f1f;">
     <div style="display:flex;align-items:center;gap:8px;">
-      <div style="width:32px;height:32px;background:linear-gradient(135deg,#10B981,#6EE7B7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#0A0E17;">N</div>
-      <div><div style="font-weight:700;font-size:0.9rem;color:#EFF3FC;">VaultPrimeTrade Support</div><div style="font-size:0.7rem;color:#22c55e;">Online</div></div>
+      <div style="width:32px;height:32px;background:linear-gradient(135deg,#10B981,#6EE7B7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#0D0D0D;">N</div>
+      <div><div style="font-weight:700;font-size:0.9rem;color:#EFF3FC;">BitSwap Support</div><div style="font-size:0.7rem;color:#22c55e;">Online</div></div>
     </div>
     <button onclick="closeChatModal()" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
   </div>
   <div id="chatMessages" style="height:280px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"><div style="text-align:center;color:#94A3B8;font-size:0.8rem;padding:20px 0;">Loading...</div></div>
-  <div style="padding:10px 12px;border-top:1px solid #1E293B;display:flex;gap:8px;align-items:center;">
-    <input id="chatInput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()" style="flex:1;background:#131A2C;border:1px solid #1E293B;border-radius:20px;padding:10px 14px;color:#EFF3FC;font-size:0.85rem;outline:none;">
-    <button onclick="sendChatMsg()" style="background:#10B981;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;color:#0A0E17;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
+  <div style="padding:10px 12px;border-top:1px solid #1f1f1f;display:flex;gap:8px;align-items:center;">
+    <input id="chatInput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()" style="flex:1;background:#141414;border:1px solid #1f1f1f;border-radius:20px;padding:10px 14px;color:#EFF3FC;font-size:0.85rem;outline:none;">
+    <button onclick="sendChatMsg()" style="background:#10B981;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;color:#0D0D0D;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
 
@@ -994,13 +994,13 @@
 
 <!-- ===== BOTTOM NAVIGATION ===== -->
 <div class="bottom-nav">
-    <a href="vaultprimetrade_dashboard.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="vaultprimetrade_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
-    <a href="vaultprimetrade_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
-    <a href="vaultprimetrade_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
-    <a href="vaultprimetrade_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
-    <a href="vaultprimetrade_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
-    <a href="vaultprimetrade_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+    <a href="bitswap_dashboard.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="bitswap_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
+    <a href="bitswap_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+    <a href="bitswap_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
+    <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
+    <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
+    <a href="bitswap_profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
 </div>
 
 <script>
@@ -1082,12 +1082,12 @@
     // Bottom nav items are real <a> links to their respective pages now, no JS needed.
 
     // Deposit / Withdraw / Plan quick-action buttons -> real pages
-    document.getElementById('depositBtn').addEventListener('click', () => window.location.href = 'vaultprimetrade_deposit.html');
-    document.getElementById('quickDepositBtn').addEventListener('click', () => window.location.href = 'vaultprimetrade_deposit.html');
-    document.getElementById('quickDepositSmall').addEventListener('click', () => window.location.href = 'vaultprimetrade_deposit.html');
-    document.getElementById('withdrawBtn').addEventListener('click', () => window.location.href = 'vaultprimetrade_withdraw.html');
-    document.getElementById('quickWithdrawSmall').addEventListener('click', () => window.location.href = 'vaultprimetrade_withdraw.html');
-    document.getElementById('buyPlanBtn').addEventListener('click', () => window.location.href = 'vaultprimetrade_plans.html');
+    document.getElementById('depositBtn').addEventListener('click', () => window.location.href = 'bitswap_deposit.html');
+    document.getElementById('quickDepositBtn').addEventListener('click', () => window.location.href = 'bitswap_deposit.html');
+    document.getElementById('quickDepositSmall').addEventListener('click', () => window.location.href = 'bitswap_deposit.html');
+    document.getElementById('withdrawBtn').addEventListener('click', () => window.location.href = 'bitswap_withdraw.html');
+    document.getElementById('quickWithdrawSmall').addEventListener('click', () => window.location.href = 'bitswap_withdraw.html');
+    document.getElementById('buyPlanBtn').addEventListener('click', () => window.location.href = 'bitswap_plans.html');
 
     // Copy referral link
     document.getElementById('copyRefBtn').addEventListener('click', () => {
@@ -1188,7 +1188,7 @@
     async function loadUserData() {
         const { data: { session } } = await sb.auth.getSession();
         if (!session) {
-            window.location.href = 'vaultprimetrade_login.html';
+            window.location.href = 'bitswap_login.html';
             return;
         }
         const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
@@ -1201,7 +1201,7 @@
             const nameAlt = document.getElementById('userNameAlt');
             if (nameAlt) nameAlt.textContent = fullName.toUpperCase();
             const refLink = document.getElementById('refLink');
-            if (refLink) refLink.textContent = 'https://VaultPrimeTrade.com/' + fullName.replace(/s+/g,'_').toUpperCase();
+            if (refLink) refLink.textContent = 'https://BitSwap.com/' + fullName.replace(/s+/g,'_').toUpperCase();
             const updatedEl = document.querySelector('.balance-updated');
             if (updatedEl) updatedEl.textContent = 'Last updated: ' + new Date().toLocaleString('en-US', {month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
             // Update balance
@@ -1227,7 +1227,7 @@
     // ===== LOGOUT =====
     async function logoutUser() {
         await sb.auth.signOut();
-        window.location.href = 'vaultprimetrade_login.html';
+        window.location.href = 'bitswap_login.html';
     }
     // Make logout available globally
     window.logoutUser = logoutUser;
@@ -1257,7 +1257,7 @@
             box.innerHTML = data.map(function(msg) {
                 const isAdmin = msg.sender_type === 'admin';
                 const time = new Date(msg.created_at).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-                return '<div style="display:flex;flex-direction:column;align-items:' + (isAdmin ? 'flex-start' : 'flex-end') + ';margin-bottom:4px;"><div style="max-width:80%;padding:8px 12px;border-radius:' + (isAdmin ? '4px 16px 16px 16px' : '16px 16px 4px 16px') + ';background:' + (isAdmin ? '#131A2C' : '#10B981') + ';color:' + (isAdmin ? '#EFF3FC' : '#0A0E17') + ';font-size:0.85rem;">' + msg.message + '</div><div style="font-size:0.65rem;color:#94A3B8;padding:0 4px;">' + time + '</div></div>';
+                return '<div style="display:flex;flex-direction:column;align-items:' + (isAdmin ? 'flex-start' : 'flex-end') + ';margin-bottom:4px;"><div style="max-width:80%;padding:8px 12px;border-radius:' + (isAdmin ? '4px 16px 16px 16px' : '16px 16px 4px 16px') + ';background:' + (isAdmin ? '#141414' : '#10B981') + ';color:' + (isAdmin ? '#EFF3FC' : '#0D0D0D') + ';font-size:0.85rem;">' + msg.message + '</div><div style="font-size:0.65rem;color:#94A3B8;padding:0 4px;">' + time + '</div></div>';
             }).join('');
             box.scrollTop = box.scrollHeight;
         } catch(e) { console.error('Chat error:', e); }
@@ -1294,7 +1294,7 @@
                 read: false
             });
             if (error) throw error;
-            await fetch('https://vaultprimetrade-backend-1.onrender.com/api/messages/send', {
+            await fetch('https://bitswap-backend-1.onrender.com/api/messages/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
                 body: JSON.stringify({ subject, message, userEmail: session.user.email })
@@ -1353,7 +1353,7 @@
             theme: isDark ? 'dark' : 'light',
             style: '1',
             locale: 'en',
-            backgroundColor: isDark ? '#0F1624' : '#FFFFFF',
+            backgroundColor: isDark ? '#111111' : '#FFFFFF',
             gridColor: isDark ? 'rgba(30,41,59,0.5)' : 'rgba(230,234,240,0.8)',
             hide_side_toolbar: false,
             allow_symbol_change: false,
