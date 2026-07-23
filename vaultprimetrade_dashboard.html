@@ -1194,7 +1194,8 @@
         const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
         if (profile) {
             // Update name
-            const fullName = (profile && profile.full_name) ? profile.full_name : session.user.email.split('@')[0];
+            const displayName = (profile && profile.username) ? profile.username : (profile && profile.full_name) ? profile.full_name : session.user.email.split('@')[0];
+            const fullName = displayName;
             const nameEl = document.getElementById('userName');
             if (nameEl) nameEl.textContent = fullName;
             const nameAlt = document.getElementById('userNameAlt');

@@ -45,6 +45,7 @@
         <p class="sub">Join now and get 10% bonus on first deposit</p>
         <div class="bonus">Limited time offer: 10% extra bonus</div>
         <input type="text" id="signupName" placeholder="Full Name" autocomplete="name">
+        <input type="text" id="signupUsername" placeholder="Username (e.g. Peter fx)" autocomplete="username">
         <input type="email" id="signupEmail" placeholder="Email Address" autocomplete="email">
         <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)">
         <input type="password" id="signupConfirm" placeholder="Confirm Password">
@@ -137,17 +138,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("signupBtn").addEventListener("click", async function() {
         hideMsg("msgBox");
-        var name  = document.getElementById("signupName").value.trim();
+        var name = document.getElementById("signupName").value.trim();
+        var username = document.getElementById("signupUsername").value.trim();
         var email = document.getElementById("signupEmail").value.trim();
-        var pass  = document.getElementById("signupPassword").value;
-        var conf  = document.getElementById("signupConfirm").value;
-        if (!name || !email || !pass || !conf) return showMsg("msgBox", "Please fill in all fields.", "error");
+        var pass = document.getElementById("signupPassword").value;
+        var conf = document.getElementById("signupConfirm").value;
+        if (!name || !username || !email || !pass || !conf) return showMsg("msgBox", "Please fill in all fields.", "error");
+        if (username.length < 3) return showMsg("msgBox", "Username must be at least 3 characters.", "error");
         if (pass !== conf) return showMsg("msgBox", "Passwords do not match.", "error");
         if (pass.length < 6) return showMsg("msgBox", "Password must be at least 6 characters.", "error");
         this.disabled = true;
         this.textContent = "Creating account...";
         try {
-            var r = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name } } });
+            var r = await sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name, username: username } } });
             if (r.error) {
                 this.disabled = false;
                 this.textContent = "Sign Up and Claim Bonus";
@@ -156,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return showMsg("msgBox", "DEBUG [" + (r.error.status || "?") + "]: " + rawMsg, "error");
             }
             if (r.data && r.data.user) {
-                await sb.from("profiles").upsert({ id: r.data.user.id, full_name: name, email: email }, { onConflict: "id" });
+                await sb.from("profiles").upsert({ id: r.data.user.id, full_name: name, username: username, email: email }, { onConflict: "id" });
             }
             await sb.auth.signOut();
             pendingEmail = email;
