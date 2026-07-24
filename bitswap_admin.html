@@ -186,7 +186,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── SESSION CHECK ON LOAD ───────────────────────────────────────
-const ADMIN_EMAILS = ['bitswap@gmail.com'];
+const ADMIN_EMAILS = ['bitswap@gmail.com', 'goldchaincapitalinvestment@gmail.com'];
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
   if (session) {
