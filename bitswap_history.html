@@ -195,7 +195,7 @@
     function renderWithdrawals() {
         let wrs = [];
         try {
-            wrs = JSON.parse(localStorage.getItem('nexvault_withdrawal_requests') || '[]');
+            wrs = JSON.parse(localStorage.getItem('bitswap_withdrawal_requests') || '[]');
             wrs = wrs.filter(r => r.userId === currentUser.id);
         } catch(e) {}
         if (wrs.length === 0) {
@@ -220,7 +220,7 @@
 
     // ---------- THEME PERSISTENCE ----------
     function loadTheme() {
-        const savedTheme = localStorage.getItem('nexvault_theme');
+        const savedTheme = localStorage.getItem('bitswap_theme');
         if (savedTheme === 'light') {
             document.body.classList.add('light');
             const icon = document.querySelector('#themeToggle i');
@@ -234,7 +234,7 @@
         const icon = document.querySelector('#themeToggle i');
         icon.classList.toggle('fa-moon');
         icon.classList.toggle('fa-sun');
-        localStorage.setItem('nexvault_theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        localStorage.setItem('bitswap_theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
 
     loadUser();
