@@ -1182,7 +1182,7 @@
 
     // ===== SUPABASE AUTH + USER DATA =====
     const SUPABASE_URL = 'https://wzphhuaxrgxprjysxzup.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6cGhodWF4cmd4cHJqeXN4enVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2ODE0MjYsImV4cCI6MjEwMDI1NzQyNn0.JGY2QohM1o262e6coRzKEzoQGjI1L5ruHQ7t4Gi40Mw';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Im30ly7e7WKp8xu-RRxDww_11U0ixuq';
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function loadUserData() {
@@ -1237,7 +1237,7 @@
     window.logoutUser = logoutUser;
 
     const SB_CHAT_URL = 'https://wzphhuaxrgxprjysxzup.supabase.co';
-    const SB_CHAT_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6cGhodWF4cmd4cHJqeXN4enVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2ODE0MjYsImV4cCI6MjEwMDI1NzQyNn0.JGY2QohM1o262e6coRzKEzoQGjI1L5ruHQ7t4Gi40Mw';
+    const SB_CHAT_KEY = 'sb_publishable_Im30ly7e7WKp8xu-RRxDww_11U0ixuq';
     const sbChat = window.supabase ? window.supabase.createClient(SB_CHAT_URL, SB_CHAT_KEY) : null;
     let chatUserId = null; let chatPollInterval = null; let chatOpen = false;
     async function initChat() { if (!sbChat) return; const { data: { session } } = await sbChat.auth.getSession(); if (session) chatUserId = session.user.id; }
