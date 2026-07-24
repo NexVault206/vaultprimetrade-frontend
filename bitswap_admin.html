@@ -89,6 +89,7 @@ input:focus{border-color:var(--accent);}
 .chat-input-wrap input:focus{border-color:var(--accent);}
 .chat-input-wrap button{background:var(--accent);border:none;padding:0 20px;border-radius:30px;font-weight:700;color:#0D0D0D;cursor:pointer;}
 </style>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
 
@@ -101,6 +102,8 @@ input:focus{border-color:var(--accent);}
   </div>
   <input type="email" id="adminEmail" placeholder="Admin Email">
   <input type="password" id="adminPassword" placeholder="Password">
+  <div class="turnstile-wrap"><div class="h-captcha" data-sitekey="48eae7b2-a4ac-470e-9aec-8aa2fd748958" data-callback="onAdminCaptchaSuccess" data-theme="dark"></div></div>
+  <script>let adminCaptchaToken = null; function onAdminCaptchaSuccess(token) { adminCaptchaToken = token; }</script>
   <div id="loginError" style="color:#ef4444;font-size:0.85rem;margin-bottom:8px;display:none;"></div>
   <button class="btn" id="loginBtn" onclick="adminLogin()">Login to Admin Panel</button>
   <button class="btn btn-outline" style="margin-top:8px;" onclick="window.location.href='bitswap_dashboard.html'">← Back to Dashboard</button>
@@ -205,9 +208,10 @@ async function adminLogin() {
   const err   = document.getElementById('loginError');
   err.style.display = 'none';
   if (!email || !pwd) { err.textContent = 'Please enter email and password.'; err.style.display = 'block'; return; }
+  if (!adminCaptchaToken) { err.textContent = 'Please complete the human verification.'; err.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'Logging in...';
   try {
-    const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd, options: { captchaToken: adminCaptchaToken } });
     if (error) { err.textContent = error.message; err.style.display = 'block'; return; }
     if (!ADMIN_EMAILS.includes(data.user.email.toLowerCase())) {
       await sb.auth.signOut();
