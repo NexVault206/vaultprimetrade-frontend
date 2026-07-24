@@ -109,7 +109,7 @@
             if (r.error) {
                 this.disabled = false;
                 this.textContent = 'Sign Up and Claim Bonus';
-                return showMsg('msgBox', r.error.message + ' | ' + JSON.stringify(r.error), 'error');
+                let msg = r.error.message; if (msg.toLowerCase().includes('already registered') || msg.toLowerCase().includes('already exists')) { msg = 'An account with this email already exists. Please log in instead.'; } return showMsg('msgBox', msg, 'error');
             }
 
             if (r.data && r.data.user) {
