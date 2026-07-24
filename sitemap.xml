@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_index.html</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_aboutus.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_services.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_contact.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_login.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_createaccount.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vaultprimetrade-frontend.onrender.com/bitswap_plans.html</loc>
+    <priority>0.7</priority>
+  </url>
+</urlset>
