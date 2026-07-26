@@ -796,17 +796,17 @@
         <div class="stats-grid">
             <div class="stat-pill">
                 <div class="stat-label">Total Profit</div>
-                <div class="stat-value">$0.00</div>
+                <div class="stat-value" id="statTotalProfit">$0.00</div>
                 <div class="stat-change">↗ +2.5% Last period</div>
             </div>
             <div class="stat-pill">
                 <div class="stat-label">Bonus</div>
-                <div class="stat-value">$0.00</div>
+                <div class="stat-value" id="statBonus">$0.00</div>
                 <div class="stat-change">🔒 Rewards & Promotions</div>
             </div>
             <div class="stat-pill">
                 <div class="stat-label">Total Deposit</div>
-                <div class="stat-value">$0.00</div>
+                <div class="stat-value" id="statTotalDeposit">$0.00</div>
                 <div class="stat-change">All time</div>
             </div>
             <div class="stat-pill">
@@ -1219,6 +1219,12 @@
             // Update balance
             const balEl = document.getElementById("balanceAmount");
             if (balEl) balEl.textContent = '$' + (profile.balance || 0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+            const profitEl = document.getElementById('statTotalProfit');
+            if (profitEl) profitEl.textContent = '$' + (profile.total_profit || 0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+            const bonusEl = document.getElementById('statBonus');
+            if (bonusEl) bonusEl.textContent = '$' + (profile.bonus || 0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+            const depositEl = document.getElementById('statTotalDeposit');
+            if (depositEl) depositEl.textContent = '$' + (profile.total_deposit || 0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
             // Update verified status
             const badge = document.getElementById('accountBadge');
             if (badge) {

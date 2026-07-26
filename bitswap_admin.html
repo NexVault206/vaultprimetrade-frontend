@@ -501,9 +501,12 @@ let chatRealtimeChannel = null;
 async function loadChatUsers() {
   try {
     // Single query: latest message + unread count per user, done in JS from one fetch
-    // capped to a recent window so it stays fast as volume grows
+    // capped to a recent window so it stays fast as volume grows.
+    // Deliberately NOT using an embedded join (profiles(...)) here - Supabase's
+    // schema cache has been unreliable about picking up new FK relationships
+    // (same issue hit on NexVaultTrade), so profiles are fetched separately instead.
     const { data: messages, error } = await sb.from('chat_messages')
-      .select('user_id, message, sender_type, read_by_admin, created_at, profiles(full_name, email)')
+      .select('user_id, message, sender_type, read_by_admin, created_at')
       .order('created_at', { ascending: false })
       .limit(500);
     if (error) throw error;
@@ -511,13 +514,21 @@ async function loadChatUsers() {
     const byUser = new Map();
     for (const m of messages) {
       if (!byUser.has(m.user_id)) {
-        byUser.set(m.user_id, { id: m.user_id, name: m.profiles?.full_name || m.profiles?.email || 'Unknown', lastMsg: m.message, lastAt: m.created_at, unread: 0 });
+        byUser.set(m.user_id, { id: m.user_id, name: null, lastMsg: m.message, lastAt: m.created_at, unread: 0 });
       }
       if (m.sender_type === 'user' && !m.read_by_admin) {
         byUser.get(m.user_id).unread++;
       }
     }
     const users = [...byUser.values()]; // already newest-first since messages was ordered desc
+
+    if (users.length) {
+      const userIds = users.map(u => u.id);
+      const { data: profilesData, error: profError } = await sb.from('profiles').select('id, full_name, email').in('id', userIds);
+      if (profError) console.error('Profile lookup error:', profError);
+      const profileMap = new Map((profilesData || []).map(p => [p.id, p]));
+      users.forEach(u => { const p = profileMap.get(u.id); u.name = p?.full_name || p?.email || 'Unknown'; });
+    }
 
     const userList = document.getElementById('chatUserList');
     if (!users.length) { userList.innerHTML = '<div class="empty">No chat users yet.</div>'; return; }
