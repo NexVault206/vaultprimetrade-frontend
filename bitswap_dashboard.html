@@ -402,6 +402,7 @@
             transform: translateX(-50%);
             z-index: 100;
             transition: background 0.3s;
+            overflow-x: auto;
         }
         body.light .bottom-nav { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); }
         .nav-item {
@@ -415,6 +416,7 @@
             transition: 0.2s;
             padding: 4px 8px;
             border-radius: 12px;
+            flex-shrink: 0;
         }
         .nav-item i { font-size: 22px; }
         .nav-item.active { color: var(--accent); }
@@ -905,7 +907,7 @@
             <div class="transaction-placeholder">No transactions found</div>
             <div class="member-info">
                 <span><i class="far fa-user-circle"></i> <span id="userNameAlt">...</span></span>
-                <span>Member since May 2026</span>
+                <span id="memberSince">Member since ...</span>
             </div>
             <div class="quick-actions">
                 <button class="btn-primary" id="quickDepositSmall">Deposit</button>
@@ -997,6 +999,7 @@
     <a href="bitswap_dashboard.html" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="bitswap_deposit.html" class="nav-item"><i class="fas fa-arrow-down"></i><span>Deposit</span></a>
     <a href="bitswap_withdraw.html" class="nav-item"><i class="fas fa-arrow-up"></i><span>Withdraw</span></a>
+    <a href="bitswap_swap.html" class="nav-item"><i class="fas fa-right-left"></i><span>Swap</span></a>
     <a href="bitswap_plans.html" class="nav-item"><i class="fas fa-chart-pie"></i><span>Plans</span></a>
     <a href="bitswap_actions.html" class="nav-item"><i class="fas fa-cogs"></i><span>Actions</span></a>
     <a href="bitswap_history.html" class="nav-item"><i class="fas fa-clock"></i><span>History</span></a>
@@ -1204,6 +1207,11 @@
             if (nameEl) nameEl.textContent = fullName;
             const nameAlt = document.getElementById('userNameAlt');
             if (nameAlt) nameAlt.textContent = fullName.toUpperCase();
+            const memberSinceEl = document.getElementById('memberSince');
+            if (memberSinceEl && profile.created_at) {
+                const joined = new Date(profile.created_at);
+                memberSinceEl.textContent = 'Member since ' + joined.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            }
             const refLink = document.getElementById('refLink');
             if (refLink) refLink.textContent = 'https://BitSwap.com/' + fullName.replace(/s+/g,'_').toUpperCase();
             const updatedEl = document.querySelector('.balance-updated');
@@ -1239,18 +1247,25 @@
     const SB_CHAT_URL = 'https://wzphhuaxrgxprjysxzup.supabase.co';
     const SB_CHAT_KEY = 'sb_publishable_Im30ly7e7WKp8xu-RRxDww_11U0ixuq';
     const sbChat = window.supabase ? window.supabase.createClient(SB_CHAT_URL, SB_CHAT_KEY) : null;
-    let chatUserId = null; let chatPollInterval = null; let chatOpen = false;
+    let chatUserId = null; let chatOpen = false; let chatRealtimeChannel = null;
     async function initChat() { if (!sbChat) return; const { data: { session } } = await sbChat.auth.getSession(); if (session) chatUserId = session.user.id; }
     initChat();
+    function subscribeChatRealtime() {
+        if (!sbChat || !chatUserId) return;
+        if (chatRealtimeChannel) sbChat.removeChannel(chatRealtimeChannel);
+        chatRealtimeChannel = sbChat.channel('user-chat-' + chatUserId)
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_messages', filter: 'user_id=eq.' + chatUserId }, function() { loadChatMessages(); })
+            .subscribe();
+    }
     document.getElementById('messageFloatBtn').addEventListener('click', function() {
         chatOpen = !chatOpen;
         const modal = document.getElementById('chatModal');
         modal.style.display = chatOpen ? 'flex' : 'none';
         modal.style.flexDirection = 'column';
-        if (chatOpen) { loadChatMessages(); if (chatPollInterval) clearInterval(chatPollInterval); chatPollInterval = setInterval(loadChatMessages, 4000); setTimeout(function() { const ci = document.getElementById('chatInput'); if(ci) ci.focus(); }, 100); }
-        else { clearInterval(chatPollInterval); }
+        if (chatOpen) { loadChatMessages(); subscribeChatRealtime(); setTimeout(function() { const ci = document.getElementById('chatInput'); if(ci) ci.focus(); }, 100); }
+        else if (chatRealtimeChannel) { sbChat.removeChannel(chatRealtimeChannel); chatRealtimeChannel = null; }
     });
-    function closeChatModal() { chatOpen = false; document.getElementById('chatModal').style.display = 'none'; clearInterval(chatPollInterval); }
+    function closeChatModal() { chatOpen = false; document.getElementById('chatModal').style.display = 'none'; if (chatRealtimeChannel) { sbChat.removeChannel(chatRealtimeChannel); chatRealtimeChannel = null; } }
     async function loadChatMessages() {
         if (!sbChat || !chatUserId) return;
         try {

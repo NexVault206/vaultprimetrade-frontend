@@ -265,6 +265,19 @@ async function loadUsers() {
           <input class="bal-input" type="number" id="bal_${u.id}" value="${(u.balance||0).toFixed(2)}" placeholder="New balance">
           <button class="action-btn blue" onclick="setBalance('${u.id}')">Set Balance</button>
         </div>
+        <div class="user-stats" id="fin_view_${u.id}">
+          <div class="stat">Bonus: <span>$${(u.bonus||0).toFixed(2)}</span></div>
+          <div class="stat">Total Profit: <span>$${(u.total_profit||0).toFixed(2)}</span></div>
+          <div class="stat">Total Deposit: <span>$${(u.total_deposit||0).toFixed(2)}</span></div>
+          <button class="action-btn blue" onclick="editFinancials('${u.id}')">Edit</button>
+        </div>
+        <div style="display:none;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;" id="fin_edit_${u.id}">
+          <input class="bal-input" type="number" id="bonus_${u.id}" value="${(u.bonus||0).toFixed(2)}" placeholder="Bonus">
+          <input class="bal-input" type="number" id="profit_${u.id}" value="${(u.total_profit||0).toFixed(2)}" placeholder="Total Profit">
+          <input class="bal-input" type="number" id="deposit_${u.id}" value="${(u.total_deposit||0).toFixed(2)}" placeholder="Total Deposit">
+          <button class="action-btn green" onclick="saveFinancials('${u.id}')">Save</button>
+          <button class="action-btn" onclick="cancelEditFinancials('${u.id}')">Cancel</button>
+        </div>
         <div class="actions">
           <button class="action-btn ${u.is_verified ? 'red' : 'green'}" onclick="toggleVerify('${u.id}', ${!u.is_verified})">${u.is_verified ? 'Unverify' : 'Verify'}</button>
           <button class="action-btn ${u.requires_additional_verification ? 'green' : 'yellow'}" onclick="toggleLock('${u.id}', ${!u.requires_additional_verification})">${u.requires_additional_verification ? '🔓 Unlock' : '🔒 Lock'}</button>
@@ -281,6 +294,26 @@ async function setBalance(userId) {
   const { error } = await sb.from('profiles').update({ balance: val }).eq('id', userId);
   if (error) { showToast('Error: ' + error.message); return; }
   showToast('Balance updated ✅'); loadUsers();
+}
+
+function editFinancials(userId) {
+  document.getElementById(`fin_view_${userId}`).style.display = 'none';
+  document.getElementById(`fin_edit_${userId}`).style.display = 'flex';
+}
+
+function cancelEditFinancials(userId) {
+  document.getElementById(`fin_edit_${userId}`).style.display = 'none';
+  document.getElementById(`fin_view_${userId}`).style.display = 'flex';
+}
+
+async function saveFinancials(userId) {
+  const bonus = parseFloat(document.getElementById(`bonus_${userId}`).value);
+  const profit = parseFloat(document.getElementById(`profit_${userId}`).value);
+  const deposit = parseFloat(document.getElementById(`deposit_${userId}`).value);
+  if (isNaN(bonus) || isNaN(profit) || isNaN(deposit)) { showToast('Enter valid amounts'); return; }
+  const { error } = await sb.from('profiles').update({ bonus, total_profit: profit, total_deposit: deposit }).eq('id', userId);
+  if (error) { showToast('Error: ' + error.message); return; }
+  showToast('Financials updated ✅'); loadUsers();
 }
 
 async function toggleVerify(userId, state) {
@@ -463,27 +496,51 @@ async function markRead(msgId) {
 let currentChatUserId = null;
 let chatPollInterval = null;
 
+let chatRealtimeChannel = null;
+
 async function loadChatUsers() {
   try {
-    // Get all users who have sent at least one chat message (distinct)
+    // Single query: latest message + unread count per user, done in JS from one fetch
+    // capped to a recent window so it stays fast as volume grows
     const { data: messages, error } = await sb.from('chat_messages')
-      .select('user_id, profiles(full_name, email)')
-      .order('created_at', { ascending: false });
+      .select('user_id, message, sender_type, read_by_admin, created_at, profiles(full_name, email)')
+      .order('created_at', { ascending: false })
+      .limit(500);
     if (error) throw error;
-    const userIds = [...new Set(messages.map(m => m.user_id))];
-    const users = [];
-    for (const uid of userIds) {
-      const { data: profile } = await sb.from('profiles').select('id, full_name, email').eq('id', uid).single();
-      if (profile) users.push(profile);
+
+    const byUser = new Map();
+    for (const m of messages) {
+      if (!byUser.has(m.user_id)) {
+        byUser.set(m.user_id, { id: m.user_id, name: m.profiles?.full_name || m.profiles?.email || 'Unknown', lastMsg: m.message, lastAt: m.created_at, unread: 0 });
+      }
+      if (m.sender_type === 'user' && !m.read_by_admin) {
+        byUser.get(m.user_id).unread++;
+      }
     }
+    const users = [...byUser.values()]; // already newest-first since messages was ordered desc
+
     const userList = document.getElementById('chatUserList');
     if (!users.length) { userList.innerHTML = '<div class="empty">No chat users yet.</div>'; return; }
     userList.innerHTML = users.map(u => `
       <div class="chat-user-item ${currentChatUserId === u.id ? 'active-chat' : ''}" data-userid="${u.id}" onclick="openChat('${u.id}')">
-        ${u.full_name || u.email}
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+          <span>${u.name}</span>
+          ${u.unread ? `<span style="background:#EF4444;color:#fff;font-size:0.65rem;padding:2px 7px;border-radius:10px;">${u.unread}</span>` : ''}
+        </div>
+        <div style="font-size:0.75rem;opacity:0.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${u.lastMsg}</div>
       </div>
     `).join('');
   } catch(e) { console.error('Chat users error:', e); }
+}
+
+function subscribeChatRealtime() {
+  if (chatRealtimeChannel) sb.removeChannel(chatRealtimeChannel);
+  chatRealtimeChannel = sb.channel('admin-chat')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_messages' }, (payload) => {
+      loadChatUsers();
+      if (currentChatUserId && payload.new.user_id === currentChatUserId) loadChatMessages(currentChatUserId, true);
+    })
+    .subscribe();
 }
 
 async function openChat(userId) {
@@ -493,9 +550,11 @@ async function openChat(userId) {
   document.querySelector(`.chat-user-item[data-userid="${userId}"]`)?.classList.add('active-chat');
   // Load messages
   await loadChatMessages(userId);
-  // Start polling
-  if (chatPollInterval) clearInterval(chatPollInterval);
-  chatPollInterval = setInterval(() => loadChatMessages(userId, true), 3000);
+  // Mark incoming messages as read, then refresh the unread badges in the list
+  await sb.from('chat_messages').update({ read_by_admin: true }).eq('user_id', userId).eq('sender_type', 'user').eq('read_by_admin', false);
+  await loadChatUsers();
+  // Live updates instead of polling
+  subscribeChatRealtime();
 }
 
 async function loadChatMessages(userId, silent = false) {
