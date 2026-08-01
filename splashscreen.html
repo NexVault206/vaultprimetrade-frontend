@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitswaptrade</title>
+    
+    <style>
+        /* --- CORE STYLES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #030611; /* Deepest premium trading background */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* --- THE ATTRACTIVE PRE-LOADER OVERLAY --- */
+        #bitswap-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #030611;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s;
+        }
+
+        /* Centered Logo Assembly Arena */
+        .splash-core-arena {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 320px;
+            height: 160px;
+        }
+
+        /* Premium Radiant Center Core Icon (The 'O') */
+        .glowing-core-ring {
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            border-radius: 50%;
+            border: 6px solid #00e676; /* Fintech Green */
+            box-shadow: 0 0 30px #00e676, 0 0 60px rgba(0, 230, 118, 0.4);
+            z-index: 5;
+            animation: corePopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Elegant Swirling Trails (Replacing raw boxes with curved gradients) */
+        .premium-trail {
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00e676);
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(0.5px);
+        }
+
+        .t1 { animation: swirlAdvanced1 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .t2 { animation: swirlAdvanced2 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .t3 { animation: swirlAdvanced3 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        /* Typography Reveal with Motion Blur Effects */
+        .brand-typography {
+            position: absolute;
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            opacity: 0;
+        }
+
+        .brand-left {
+            right: 55%;
+            animation: textRevealLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+        }
+
+        .brand-right {
+            left: 55%;
+            animation: textRevealRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+        }
+
+        /* --- HIGH END ANIMATION MATH --- */
+        @keyframes corePopIn {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; filter: blur(5px); }
+            70% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+        }
+
+        /* Fast, elegant orbital paths curving directly into the core asset */
+        @keyframes swirlAdvanced1 {
+            0% { transform: rotate(0deg) translateX(140px) scaleX(2) rotate(0deg); opacity: 0; }
+            30% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: rotate(360deg) translateX(0px) scaleX(0.5) rotate(-360deg); opacity: 0; }
+        }
+
+        @keyframes swirlAdvanced2 {
+            0% { transform: rotate(120deg) translateX(140px) scaleX(2) rotate(-120deg); opacity: 0; }
+            30% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: rotate(480deg) translateX(0px) scaleX(0.5) rotate(-480deg); opacity: 0; }
+        }
+
+        @keyframes swirlAdvanced3 {
+            0% { transform: rotate(240deg) translateX(140px) scaleX(2) rotate(-240deg); opacity: 0; }
+            30% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: rotate(600deg) translateX(0px) scaleX(0.5) rotate(-600deg); opacity: 0; }
+        }
+
+        /* Text parts glide out smoothly from behind the core logo dot */
+        @keyframes textRevealLeft {
+            0% { transform: translateX(-40px) scale(0.95); opacity: 0; filter: blur(8px); }
+            100% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+
+        @keyframes textRevealRight {
+            0% { transform: translateX(40px) scale(0.95); opacity: 0; filter: blur(8px); }
+            100% { transform: translateX(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+
+        /* System Removal Smooth Fade Out */
+        .hide-splash {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ATTRACTIVE PREMIUM FIRST LAYOUT -->
+    <div id="bitswap-splash">
+        <div class="splash-core-arena">
+            <!-- Smooth Sliding Left Branding Text -->
+            <div class="brand-typography brand-left">Bit</div>
+            
+            <!-- Highly Styled Light Core Ring -->
+            <div class="glowing-core-ring"></div>
+            
+            <!-- Dynamic Curving Particle Trails -->
+            <div class="premium-trail t1"></div>
+            <div class="premium-trail t2"></div>
+            <div class="premium-trail t3"></div>
+            
+            <!-- Smooth Sliding Right Branding Text -->
+            <div class="brand-typography brand-right">swap</div>
+        </div>
+    </div>
+
+   </body>
+</html>
