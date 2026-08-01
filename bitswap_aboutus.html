@@ -27,63 +27,6 @@
   </style>
 </head>
 <body>
-<div class="site-search-wrap">
-  <input type="text" id="siteSearchInput" placeholder="Search..." autocomplete="off" />
-  <div id="siteSearchResults" class="site-search-results"></div>
-</div>
-
-<style>
-.site-search-wrap { position: relative; width: 100%; max-width: 320px; }
-#siteSearchInput {
-  width: 100%; padding: 10px 14px; border-radius: 8px;
-  border: 1px solid #059669; background: var(--bg-card, #1A1D2E);
-  color: var(--text-primary, #EFF3FC); font-size: 14px;
-}
-.site-search-results {
-  position: absolute; top: 105%; left: 0; right: 0;
-  background: var(--bg-card, #1A1D2E); border: 1px solid #10B981;
-  border-radius: 8px; overflow: hidden; z-index: 50; display: none;
-}
-.site-search-results a {
-  display: block; padding: 10px 14px; color: var(--text-primary, #EFF3FC);
-  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.site-search-results a:hover { background: #10B981; color: #000; }
-.site-search-results.active { display: block; }
-</style>
-
-<script src="search-data.js"></script>
-<script>
-  const searchInput = document.getElementById("siteSearchInput");
-  const resultsBox = document.getElementById("siteSearchResults");
-
-  searchInput.addEventListener("input", () => {
-    const q = searchInput.value.trim().toLowerCase();
-    resultsBox.innerHTML = "";
-    if (!q) { resultsBox.classList.remove("active"); return; }
-
-    const matches = SITE_PAGES.filter(p =>
-      p.title.toLowerCase().includes(q) || p.keywords.toLowerCase().includes(q)
-    );
-
-    if (matches.length === 0) {
-      resultsBox.innerHTML = "<a href=%23 style=color:#999;>No results found</a>";
-    } else {
-      matches.forEach(p => {
-        const a = document.createElement("a");
-        a.href = p.url;
-        a.textContent = p.title;
-        resultsBox.appendChild(a);
-      });
-    }
-    resultsBox.classList.add("active");
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".site-search-wrap")) resultsBox.classList.remove("active");
-  });
-</script>
-
 <div class="container">
   <div class="navbar">
     <div class="logo"><h1>BitSwap</h1></div>
