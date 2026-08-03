@@ -3,66 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - BitSwap</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Create Account - BitSwapTrade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: linear-gradient(145deg, #0D0D0D, #111111); font-family: Inter, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .card { background: #111111; padding: 40px 42px; border-radius: 48px; width: 480px; max-width: 100%; border: 1px solid #2a2a2a; box-shadow: 0 25px 45px rgba(0,0,0,0.6); }
-        .logo { text-align: center; margin-bottom: 28px; }
-        .logo span { color: #10B981; font-size: 1.6rem; font-weight: 800; }
-        h1 { color: #10B981; font-weight: 700; font-size: 1.8rem; margin-bottom: 6px; }
-        .sub { color: #9ca3af; margin-bottom: 20px; font-size: 0.95rem; }
-        .bonus { background: #1e2a3a; padding: 12px 16px; border-radius: 30px; text-align: center; margin: 0 0 18px; color: #10B981; font-weight: 600; font-size: 0.95rem; }
-        input { width: 100%; padding: 14px 18px; margin: 6px 0; background: #1a1a1a; border: 1px solid #2d354c; border-radius: 30px; color: #fff; font-size: 1rem; outline: none; transition: border 0.2s; }
-        input:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
-        .btn { width: 100%; background: #10B981; padding: 15px; border: none; border-radius: 40px; font-weight: 700; font-size: 1rem; margin-top: 16px; cursor: pointer; color: #111111; }
+        body { background: #0A0A0A; font-family: 'Inter', sans-serif; color: #fff; min-height: 100vh; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid #1f1f1f; }
+        .topbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .topbar-logo { width: 30px; height: 30px; }
+        .topbar-brand span { font-size: 1.25rem; font-weight: 800; color: #fff; }
+        .topbar-brand span b { color: #10B981; }
+        .container { max-width: 480px; margin: 0 auto; padding: 40px 24px 60px; }
+        h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 8px; }
+        .sub { color: #9ca3af; margin-bottom: 26px; font-size: 0.95rem; }
+        .bonus { background: #10291f; border: 1px solid #164a34; padding: 12px 16px; border-radius: 12px; text-align: center; margin-bottom: 26px; color: #34D399; font-weight: 600; font-size: 0.9rem; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .google-btn { background: #fff; color: #111; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0; }
-        .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0 10px; color: #6b7280; font-size: 0.85rem; }
-        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #2d354c; }
-        .turnstile-wrap { margin-top: 16px; display: flex; justify-content: center; }
+        .google-btn { background: #fff; color: #111; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 22px; }
+        .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: #6b7280; font-size: 0.85rem; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #262626; }
+        .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #d1d5db; }
+        .field { margin-bottom: 18px; }
+        input { width: 100%; padding: 14px 16px; background: #141414; border: 1px solid #2a2a2a; border-radius: 12px; color: #fff; font-size: 1rem; outline: none; transition: border 0.2s; }
+        input::placeholder { color: #6b7280; }
+        input:focus { border-color: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+        .pass-wrap { position: relative; }
+        .pass-toggle { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; font-size: 1.2rem; background: none; border: none; padding: 4px; }
+        .turnstile-wrap { margin: 8px 0 18px; display: flex; justify-content: center; }
+        .btn-submit { background: #10B981; color: #06120d; margin-top: 6px; }
         .msg { padding: 12px 16px; border-radius: 12px; margin-top: 14px; font-size: 0.9rem; display: none; }
         .msg.error { background: #2a1515; color: #f87171; display: block; }
-        .msg.success { background: #152a1a; color: #4ade80; display: block; }
+        .msg.success { background: #10291f; color: #4ade80; display: block; }
         .msg.info { background: #1a263a; color: #93c5fd; display: block; }
-        .link { text-align: center; margin-top: 22px; color: #9ca3af; font-size: 0.95rem; }
-        .link a { color: #10B981; text-decoration: none; font-weight: 500; }
-        @media (max-width: 520px) { .card { padding: 28px 20px; } }
+        .link { text-align: center; margin-top: 24px; color: #9ca3af; font-size: 0.9rem; }
+        .link a { color: #10B981; text-decoration: none; font-weight: 600; }
+        @media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-<div class="card">
-    <div class="logo"><span>BitSwap</span></div>
+    <div class="topbar">
+        <a class="topbar-brand" href="bitswap_index.html">
+            <svg class="topbar-logo" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#10B981"/>
+                <path d="M2 12l10 5 10-5" stroke="#10B981" stroke-width="2" fill="none"/>
+            </svg>
+            <span><b>BitSwap</b>Trade</span>
+        </a>
+    </div>
 
-    <div id="signupScreen">
-        <h1>Create Account</h1>
-        <p class="sub">Join now and get 10% bonus on first deposit</p>
-        <div class="bonus">Limited time offer: 10% extra bonus</div>
+    <div class="container" id="signupScreen">
+        <h1>Create your account</h1>
+        <p class="sub">Join BitSwapTrade and get started</p>
+        <div class="bonus">Limited time offer: 10% extra bonus on first deposit</div>
 
-        <button type="button" class="btn google-btn" id="googleBtn"><svg width="18" height="18" viewBox="0 0 18 18" style="margin-right:8px;"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.83.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.94v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17.28-1.7V4.97H.94A9 9 0 0 0 0 9c0 1.45.35 2.83.94 4.03l3.01-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .94 4.97l3.01 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>Continue with Google</button>
-        <div class="divider"><span>or sign up with email</span></div>
+        <button type="button" class="btn google-btn" id="googleBtn">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.88 2.7-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.83.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.94v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.95 10.7A5.4 5.4 0 0 1 3.67 9c0-.59.1-1.17-1.7V4.97H.94A9 9 0 0 0 0 9c0 1.45.35 2.83.94 4.03l3.01-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .94 4.97l3.01 2.33C4.66 5.17 6.65 3.58 9 3.58z"/></svg>
+            Sign up with Google
+        </button>
 
-        <input type="text" id="signupName" placeholder="Full Name" autocomplete="name">
-        <input type="email" id="signupEmail" placeholder="Email Address" autocomplete="email">
-        <input type="password" id="signupPassword" placeholder="Create Password (min 6 chars)">
-        <input type="password" id="signupConfirm" placeholder="Confirm Password">
+        <div class="divider">or sign up with email</div>
+
+        <div class="row2">
+            <div class="field">
+                <label>First name</label>
+                <input type="text" id="signupFirstName" placeholder="John" autocomplete="given-name">
+            </div>
+            <div class="field">
+                <label>Last name</label>
+                <input type="text" id="signupLastName" placeholder="Doe" autocomplete="family-name">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <div class="pass-wrap">
+                <input type="password" id="signupPassword" placeholder="min. 6 characters">
+                <button type="button" class="pass-toggle" id="togglePass">👁</button>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Confirm password</label>
+            <div class="pass-wrap">
+                <input type="password" id="signupConfirm" placeholder="Confirm password">
+                <button type="button" class="pass-toggle" id="toggleConfirm">👁</button>
+            </div>
+        </div>
 
         <div class="turnstile-wrap">
             <div class="h-captcha" data-sitekey="48eae7b2-a4ac-470e-9aec-8aa2fd748958" data-callback="onTurnstileSuccess" data-theme="dark"></div>
         </div>
 
         <div class="msg" id="msgBox"></div>
-        <button class="btn" type="button" id="signupBtn">Sign Up and Claim Bonus</button>
-        <div class="link">Already have an account? <a href="bitswap_login.html">Login</a> | <a href="bitswap_index.html">Home</a></div>
+        <button class="btn btn-submit" type="button" id="signupBtn">Create account</button>
+        <div class="link">Already have an account? <a href="bitswap_login.html">Sign in</a></div>
     </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <script>
     const SUPABASE_URL = 'https://wzphhuaxrgxprjysxzup.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_Im30ly7e7WKp8xu-RRxDww_11U0ixuq';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Im3Oly7e7WKp8xu-RRxDww_11U0ixuq';
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let turnstileToken = null;
@@ -74,6 +121,15 @@
         el.className = 'msg ' + type;
     }
 
+    document.getElementById('togglePass').addEventListener('click', function() {
+        const inp = document.getElementById('signupPassword');
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+    });
+    document.getElementById('toggleConfirm').addEventListener('click', function() {
+        const inp = document.getElementById('signupConfirm');
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+    });
+
     document.getElementById('googleBtn').addEventListener('click', async function() {
         const { error } = await sb.auth.signInWithOAuth({
             provider: 'google',
@@ -83,12 +139,14 @@
     });
 
     document.getElementById('signupBtn').addEventListener('click', async function() {
-        const name = document.getElementById('signupName').value.trim();
+        const firstName = document.getElementById('signupFirstName').value.trim();
+        const lastName = document.getElementById('signupLastName').value.trim();
+        const name = (firstName + ' ' + lastName).trim();
         const email = document.getElementById('signupEmail').value.trim();
         const pass = document.getElementById('signupPassword').value;
         const conf = document.getElementById('signupConfirm').value;
 
-        if (!name || !email || !pass || !conf) return showMsg('msgBox', 'Please fill in all fields.', 'error');
+        if (!firstName || !lastName || !email || !pass || !conf) return showMsg('msgBox', 'Please fill in all fields.', 'error');
         if (pass !== conf) return showMsg('msgBox', 'Passwords do not match.', 'error');
         if (pass.length < 6) return showMsg('msgBox', 'Password must be at least 6 characters.', 'error');
         if (!turnstileToken) return showMsg('msgBox', 'Please complete the human verification.', 'error');
@@ -108,7 +166,7 @@
 
             if (r.error) {
                 this.disabled = false;
-                this.textContent = 'Sign Up and Claim Bonus';
+                this.textContent = 'Create account';
                 let msg = r.error.message; if (msg.toLowerCase().includes('already registered') || msg.toLowerCase().includes('already exists')) { msg = 'An account with this email already exists. Please log in instead.'; } return showMsg('msgBox', msg, 'error');
             }
 
@@ -124,7 +182,7 @@
             }
         } catch (e) {
             this.disabled = false;
-            this.textContent = 'Sign Up and Claim Bonus';
+            this.textContent = 'Create account';
             showMsg('msgBox', 'Error: ' + (e.message || JSON.stringify(e)), 'error');
         }
     });
