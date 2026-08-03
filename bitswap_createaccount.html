@@ -84,7 +84,6 @@
             <label>Password</label>
             <div class="pass-wrap">
                 <input type="password" id="signupPassword" placeholder="min. 6 characters">
-                <button type="button" class="pass-toggle" id="togglePass">👁</button>
             </div>
         </div>
 
@@ -92,7 +91,6 @@
             <label>Confirm password</label>
             <div class="pass-wrap">
                 <input type="password" id="signupConfirm" placeholder="Confirm password">
-                <button type="button" class="pass-toggle" id="toggleConfirm">👁</button>
             </div>
         </div>
 
@@ -120,15 +118,6 @@
         el.textContent = text;
         el.className = 'msg ' + type;
     }
-
-    document.getElementById('togglePass').addEventListener('click', function() {
-        const inp = document.getElementById('signupPassword');
-        inp.type = inp.type === 'password' ? 'text' : 'password';
-    });
-    document.getElementById('toggleConfirm').addEventListener('click', function() {
-        const inp = document.getElementById('signupConfirm');
-        inp.type = inp.type === 'password' ? 'text' : 'password';
-    });
 
     document.getElementById('googleBtn').addEventListener('click', async function() {
         const { error } = await sb.auth.signInWithOAuth({
