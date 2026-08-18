@@ -172,7 +172,11 @@
         } catch (e) {
             this.disabled = false;
             this.textContent = 'Create account';
-            showMsg('msgBox', 'Error: ' + (e.message || JSON.stringify(e)), 'error');
+            if (e.message && e.message.toLowerCase().includes('failed to fetch')) {
+                showMsg('msgBox', 'No internet connection. Please check your network and try again.', 'error');
+            } else {
+                showMsg('msgBox', 'Error: ' + (e.message || JSON.stringify(e)), 'error');
+            }
         }
     });
 </script>

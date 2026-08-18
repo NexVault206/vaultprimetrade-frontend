@@ -152,7 +152,11 @@
 
             } catch (err) {
                 console.error(err);
-                showMessage('Unexpected error. Please try again.', 'error');
+                if (err.message && err.message.toLowerCase().includes('failed to fetch')) {
+                    showMessage('No internet connection. Please check your network and try again.', 'error');
+                } else {
+                    showMessage('Unexpected error. Please try again.', 'error');
+                }
             } finally {
                 btn.disabled = false;
                 btn.textContent = 'Login';
